@@ -1,0 +1,380 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg:           #FFF8EC;
+    --surface:      #FFFFFF;
+    --surface-2:    #FDF0D8;
+    --border:       #EBDDBF;
+    --text:         #2B2116;
+    --text-muted:   #7A6A55;
+    --primary:      #F59E0B;  /* amber: main CTA */
+    --primary-text: #B45309;  /* readable amber for text/icons */
+    --accent:       #EA580C;  /* warm orange highlight */
+    --on-accent:    #2B2116;  /* dark text on amber buttons, never white */
+    --glow:         rgba(245, 158, 11, 0.35);
+    --success:      #15803D;
+    --warning:      #B45309;
+    --danger:       #DC2626;
+
+    --event-accent: #EAB308; /* Default wedding gold */
+  }
+
+  .dark {
+    --bg:           #0B0A10;  /* page */
+    --surface:      #14121C;  /* cards */
+    --surface-2:    #1C1928;  /* raised / hover */
+    --border:       #2A2638;
+    --text:         #F4F2FA;
+    --text-muted:   #A19DB5;
+    --primary:      #7C3AED;  /* filled purple buttons, active nav */
+    --primary-text: #A78BFA;  /* purple text/icons on dark */
+    --accent:       #FACC15;  /* neon yellow: main CTA, highlights, key numbers */
+    --on-accent:    #1A1203;  /* text on yellow */
+    --glow:         rgba(124, 58, 237, 0.35);
+    --success:      #34D399;
+    --warning:      #FBBF24;
+    --danger:       #F87171;
+
+    --event-accent: #FACC15;
+  }
+
+  /* Event-type accent only changes highlight chip and chart hue */
+  .theme-wedding {
+    --event-accent: #EAB308; /* gold */
+  }
+  .theme-birthday {
+    --event-accent: #F97316; /* coral */
+  }
+  .theme-community {
+    --event-accent: #10B981; /* green */
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+}
+
+/* Tabular numerals for money, countdowns, and dates */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* Production-grade Card (24px padding, 16px radius, 1px border, 4px hover lift) */
+.ui-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  transition: transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              border-color 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.ui-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px var(--glow);
+}
+
+.dark .ui-card:hover {
+  border-color: var(--primary);
+}
+
+:root:not(.dark) .ui-card:hover {
+  border-color: var(--primary);
+}
+
+/* Section 5.4 Buttons (44px height, 12px radius, font-weight 600, 180ms transition) */
+.btn-primary {
+  height: 44px;
+  border-radius: 12px;
+  font-weight: 600;
+  padding: 0 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              filter 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Dark mode primary: yellow background with dark text */
+.dark .btn-primary {
+  background-color: var(--accent);
+  color: var(--on-accent);
+}
+
+/* Light mode primary: amber background with dark text */
+:root:not(.dark) .btn-primary {
+  background-color: var(--primary);
+  color: var(--on-accent);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--glow);
+  filter: brightness(1.06);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: scale(0.97);
+  box-shadow: none;
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Secondary Button: 1px border */
+.btn-secondary {
+  height: 44px;
+  border-radius: 12px;
+  font-weight: 600;
+  padding: 0 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.dark .btn-secondary {
+  border: 1px solid var(--primary);
+  color: var(--primary-text);
+}
+.dark .btn-secondary:hover:not(:disabled) {
+  background-color: rgba(124, 58, 237, 0.12);
+  border-color: #8B5CF6;
+}
+
+:root:not(.dark) .btn-secondary {
+  border: 1px solid var(--primary);
+  color: var(--primary-text);
+}
+:root:not(.dark) .btn-secondary:hover:not(:disabled) {
+  background-color: rgba(245, 158, 11, 0.12);
+  border-color: #D97706;
+}
+
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Ghost Button */
+.btn-ghost {
+  height: 44px;
+  border-radius: 12px;
+  font-weight: 600;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background-color 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              color 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background-color: var(--surface-2);
+  color: var(--text);
+}
+
+/* Form inputs: 44px height, 8px gap, focus ring */
+.ui-input {
+  height: 44px;
+  border-radius: 12px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  padding: 0 16px;
+  color: var(--text);
+  font-size: 14px;
+  width: 100%;
+  transition: border-color 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.ui-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--glow);
+}
+
+/* Accessible focus ring for all interactive elements */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Active Nav Indicator Bar (3px) */
+.nav-active-indicator {
+  position: relative;
+}
+
+.nav-active-indicator::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  border-radius: 0 2px 2px 0;
+}
+
+.dark .nav-active-indicator::before {
+  background-color: var(--accent);
+}
+
+:root:not(.dark) .nav-active-indicator::before {
+  background-color: var(--primary);
+}
+
+/* Icon slide effect on button hover */
+.btn-primary:hover .btn-icon-slide,
+.btn-secondary:hover .btn-icon-slide {
+  transform: translateX(4px);
+}
+.btn-icon-slide {
+  transition: transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Page fade in and slight 8px rise */
+@keyframes pageRise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-transition {
+  animation: pageRise 200ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* Accessible High-Contrast Badges */
+.badge-danger {
+  background-color: #FEE2E2;
+  color: #991B1B;
+  border: 1px solid #FCA5A5;
+}
+.dark .badge-danger {
+  background-color: #2D1215;
+  color: #FCA5A5;
+  border-color: #7F1D1D;
+}
+
+.badge-warning {
+  background-color: #FEF3C7;
+  color: #92400E;
+  border: 1px solid #FCD34D;
+}
+.dark .badge-warning {
+  background-color: #2D200E;
+  color: #FCD34D;
+  border-color: #78350F;
+}
+
+.badge-primary {
+  background-color: #F3E8FF;
+  color: #6B21A8;
+  border: 1px solid #D8B4FE;
+}
+.dark .badge-primary {
+  background-color: #251336;
+  color: #D8B4FE;
+  border-color: #581C87;
+}
+
+.badge-success {
+  background-color: #D1FAE5;
+  color: #065F46;
+  border: 1px solid #6EE7B7;
+}
+.dark .badge-success {
+  background-color: #0D281E;
+  color: #6EE7B7;
+  border-color: #065F46;
+}
+
+/* Accessible High-Contrast Alerts */
+.alert-danger {
+  background-color: #FEE2E2;
+  color: #991B1B;
+  border: 1px solid #FCA5A5;
+}
+.dark .alert-danger {
+  background-color: #241113;
+  color: #FECACA;
+  border-color: #7F1D1D;
+}
+
+.alert-warning {
+  background-color: #FEF3C7;
+  color: #92400E;
+  border: 1px solid #FCD34D;
+}
+.dark .alert-warning {
+  background-color: #241B0B;
+  color: #FDE68A;
+  border-color: #78350F;
+}
+
+.alert-info {
+  background-color: #DBEAFE;
+  color: #1E40AF;
+  border: 1px solid #93C5FD;
+}
+.dark .alert-info {
+  background-color: #0F172A;
+  color: #BFDBFE;
+  border-color: #1E3A8A;
+}
+
+.alert-success {
+  background-color: #D1FAE5;
+  color: #065F46;
+  border: 1px solid #6EE7B7;
+}
+.dark .alert-success {
+  background-color: #0B2017;
+  color: #A7F3D0;
+  border-color: #065F46;
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+    transform: none !important;
+  }
+}

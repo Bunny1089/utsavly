@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+.venv/
+venv/
+env/
+
+# Environment Variables & Credentials
+.env
+.env.local
+.env.*.local
+
+# Databases & Runtime
+*.db
+*.sqlite3
+*.log
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Build artifacts & Audit reports
+dist/
+build/
+.tempmediaStorage/
+lighthouse_report.json
+lh_desktop.json
+frontend/lighthouse_report.json
+frontend/lh_desktop.json
+brag-output/
+brag-output*/
+.agents/
+skills-lock.json
+
